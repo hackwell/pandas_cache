@@ -30,7 +30,7 @@ def pd_cache(func):
 
     try:
         os.mkdir('.pd_cache')
-        print('created `./.pd_cache/ dir')
+        #print('created `./.pd_cache/ dir')
 
     except FileExistsError:
         pass
@@ -47,7 +47,7 @@ def pd_cache(func):
 
         if os.path.exists(f):
             df = pd.read_pickle(f)
-            print(f'\t | read {f}')
+            #print(f'\t | read {f}')
             return df
 
         else:
@@ -60,7 +60,7 @@ def pd_cache(func):
             # Write new
             df = func(*args, **kw)
             df.to_pickle(f)
-            print(f'\t | wrote {f}')
+            #print(f'\t | wrote {f}')
             return df
 
     return cache
@@ -76,10 +76,10 @@ def del_cached():
     # TODO: update this to use the glob format from pd_cache to safeguard deleting arbitrary files.
     cached = os.listdir('./.pd_cache/')
     cached = ['./.pd_cache/'+ file_name for file_name in cached]
-    print(cached)
+    #print(cached)
     if len(cached) > 0:
         [os.remove(x) for x in cached]
-        print(f'removed {cached}')
+        #print(f'removed {cached}')
         return
     else:
         return 'No cached DataFrames'
